@@ -1,0 +1,84 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile information",
+      "type": "object",
+      "properties": {
+        "regNumber": { "type": "string", "description": "The EU-CC-CCC-DD-NNN format registration number" },
+        "role": { "type": "string", "enum": ["user", "admin"] },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["regNumber", "role"]
+    },
+    "Receipt": {
+      "title": "Receipt",
+      "description": "A payment receipt uploaded by a user",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "regNumber": { "type": "string" },
+        "imageUrl": { "type": "string" },
+        "note": { "type": "string" },
+        "status": { "type": "string", "enum": ["pending", "verified", "rejected"] },
+        "rejectionReason": { "type": "string" },
+        "amount": { "type": "number" },
+        "createdAt": { "type": "string", "format": "date-time" },
+        "verifiedAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "regNumber", "imageUrl", "status", "createdAt"]
+    },
+    "Ticket": {
+      "title": "Ticket",
+      "description": "A generated lottery ticket",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string" },
+        "regNumber": { "type": "string" },
+        "lotteryNumber": { "type": "string", "description": "XXXX XXXX XXXX format" },
+        "receiptId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["userId", "regNumber", "lotteryNumber", "receiptId", "createdAt"]
+    },
+    "Setting": {
+      "title": "Setting",
+      "description": "Global application settings and UI texts",
+      "type": "object",
+      "properties": {
+        "bankName": { "type": "string" },
+        "accountNumber": { "type": "string" },
+        "accountName": { "type": "string" },
+        "ticketPrice": { "type": "number" },
+        "editedTotalReward": { "type": "number" },
+        "uiTexts": {
+          "type": "object",
+          "properties": {
+            "welcome_message": { "type": "string" },
+            "payment_instruction": { "type": "string" },
+            "footer_text": { "type": "string" },
+            "ticket_button_copy": { "type": "string" }
+          }
+        }
+      }
+    }
+  },
+  "firestore": {
+    "users/{userId}": {
+      "schema": "User",
+      "description": "Public and private user profile data"
+    },
+    "receipts/{receiptId}": {
+      "schema": "Receipt",
+      "description": "Collection of uploaded payment receipts"
+    },
+    "tickets/{ticketId}": {
+      "schema": "Ticket",
+      "description": "Collection of generated lottery tickets"
+    },
+    "settings/global": {
+      "schema": "Setting",
+      "description": "Global settings document"
+    }
+  }
+}

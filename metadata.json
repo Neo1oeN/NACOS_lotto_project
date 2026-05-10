@@ -1,0 +1,6 @@
+{
+  "name": "NACOS Lottery System",
+  "description": "A secure, full-stack lottery system for NACOS with admin verification and automated number generation.",
+  "requestFramePermissions": [],
+  "majorCapabilities": []
+}

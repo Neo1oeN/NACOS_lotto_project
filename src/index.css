@@ -1,0 +1,26 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #0B3B2A;
+  --color-primary-light: #006400;
+  --color-accent: #D4AF37; /* Gold */
+  --color-cream: #F5F5DC;
+  
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+}
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans;
+  }
+}
+
+.ticket-gradient {
+  background: linear-gradient(135deg, #0B3B2A 0%, #006400 100%);
+}
+
+.lottery-number-digit {
+  display: inline-block;
+  perspective: 1000px;
+}
